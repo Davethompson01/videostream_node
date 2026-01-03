@@ -13,6 +13,7 @@
   "dependencies": {
     "argon2": "^0.44.0",
     "axios": "^1.13.2",
+    "cloudinary": "^2.8.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
@@ -25,6 +26,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.0.0",
     "tsx": "^4.21.0"
   }
 }

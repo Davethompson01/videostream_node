@@ -1,5 +1,5 @@
 import { deepStrictEqual } from "assert";
-import database from "../config/database_connect.ts";
+import database from "../../config/database_connect.ts";
 import utilis from "../controller/utilis.ts";
 
 // const utils = new Utilis();
@@ -71,7 +71,7 @@ export default class dbOPS {
     }
 
     const columns = Object.keys(data);
-    const check = this.validateColumns(columns);
+    const check = await this.validateColumns(columns);
 
     if (!check.success) return check;
 
@@ -111,7 +111,7 @@ export default class dbOPS {
       return this.utils.returnData(false, "Invalid table name", table);
     }
 
-    const columnCheck = this.validateColumns(columns);
+    const columnCheck = await this.validateColumns(columns);
     if (!columnCheck.success) return columnCheck;
 
     let sql = `SELECT ${columns.join(", ")} FROM ${table}`;
@@ -209,7 +209,7 @@ export default class dbOPS {
     }
 
     const columns = Object.keys(data);
-    const validation = this.validateColumns(columns);
+    const validation = await this.validateColumns(columns);
     if (!validation.success) return validation;
 
     const setClause = columns.map((col) => `${col} = ?`).join(", ");
@@ -266,7 +266,7 @@ export default class dbOPS {
       return this.utils.returnData(false, "Invalid ID column name", idColumn);
     }
 
-    const columnCheck = this.validateColumns(columns);
+    const columnCheck = await this.validateColumns(columns);
     if (!columnCheck.success) return columnCheck;
 
     let sql = "";

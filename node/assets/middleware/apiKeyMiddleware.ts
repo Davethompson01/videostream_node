@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-export default function apiKey(
+export default async function apiKey(
   req: Request,
   res: Response,
   next: NextFunction

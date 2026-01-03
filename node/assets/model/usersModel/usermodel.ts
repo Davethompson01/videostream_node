@@ -1,23 +1,33 @@
 import utilis from "../../controller/utilis.ts";
 import dbOPS from "../dbOPS.ts";
 
+export default class UserModel {
+  public Utilis = new utilis();
+  public dbops = new dbOPS();
 
-export default class UserModel{
+  public async checkMailExist(email: string) {
+    const columns = [email];
+    const condition = "email = ?";
 
-    public Utilis = new utilis()
-    public dbops = new dbOPS()
-
-    public async checkMailExist(email : string){
-
-        const columns = [email]
-        const condition = 'email = ?'
-
-        const checkMail = await this.dbops.select('user',
-            columns,
-            condition
-        )
-        if(checkMail.data === 1 ){
-            return this.Utilis.returnData(true, 'Email already exist', checkMail)
-        }
+    const checkMail = await this.dbops.select("user", columns, condition);
+    if (checkMail.data === 1) {
+      return await this.Utilis.returnData(
+        true,
+        "Email already exist",
+        checkMail.data.insertId
+      );
     }
+  }
+
+  public async getUserId(userID: string) {
+    const columns = [userID];
+    const conditions = "user_id = ?";
+    const select = await this.dbops.select("users", columns, conditions);
+
+    if (select.data === 1) {
+      return await this.Utilis.returnData(true, "user already exist", select);
+    }
+
+    return await this.Utilis.returnData(false, "can't find user", select);
+  }
 }

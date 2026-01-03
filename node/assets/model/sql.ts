@@ -24,6 +24,8 @@ export default class sql {
   }
 }
 
+
+
 // Immediately invoked async function to run the script
 (async () => {
   try {
