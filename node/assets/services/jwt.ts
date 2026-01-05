@@ -22,13 +22,13 @@ export default class jwtService {
     const token = jwt.sign(tokenPayload, this.secret_key, { expiresIn: "1h" });
     return token;
   }
-  
 
   public async generateRefreshToken(payload: {
     user_id: string;
+    user_type: string;
     token_id: string;
   }) {
-    return jwt.sign(payload, this.refresh_token, {
+    return jwt.sign(payload, this.secret_key, {
       expiresIn: "20d",
     });
   }

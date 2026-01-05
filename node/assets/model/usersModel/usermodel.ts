@@ -25,9 +25,9 @@ export default class UserModel {
     const select = await this.dbops.select("users", columns, conditions);
 
     if (select.data === 1) {
-      return await this.Utilis.returnData(true, "user already exist", select);
+      return this.Utilis.returnData(true, "user already exist", select);
     }
 
-    return await this.Utilis.returnData(false, "can't find user", select);
+    return this.Utilis.returnData(false, "can't find user", select);
   }
 }

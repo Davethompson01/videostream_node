@@ -1,3 +1,4 @@
+import { log } from "console";
 import utilis from "../controller/utilis.ts";
 import jwtService from "../services/jwt.ts";
 import { Request, Response, NextFunction } from "express";
@@ -32,6 +33,7 @@ export default async function authenicate(
   console.log("TOKEN PARTS:", token.split(".").length);
 
   const decoded = await jwt.verifyToken(token);
+  
   
 
   if (!decoded.success) {

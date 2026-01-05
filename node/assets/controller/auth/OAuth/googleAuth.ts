@@ -110,13 +110,16 @@ export default class OAuthController {
         // tokenRes.data.expires_in
       );
 
-      const user_id = user.data.user_id;
+      const user_id = await user.data.user_id;
       console.log("this is the user_id", user_id);
 
       const refreshToken = await this.jwt.generateRefreshToken({
-        user_id,
+        user_id: user.data.user_id,
+        user_type: "google_user",
         token_id: crypto.randomUUID(),
       });
+
+      // console.log()
 
       const refreshHash = crypto
         .createHash("sha256")
@@ -135,15 +138,24 @@ export default class OAuthController {
         user_type: "google_user",
       });
 
-      console.log(token);
+      console.log(token, " this is the refresh token for users", refreshToken);
 
-      // Redirect to frontend
-      return res.redirect(`http://localhost:3000/oauth-success`);
+      return this.utils.sendResponse(res, 201, true, "Account created", {
+        jwt: token,
+        accessToken: refreshToken,
+      });
+      // return res.redirect(`http://localhost:3000/oauth-success`);
     } catch (error: any) {
       console.error("Google OAuth error:", error.response?.data || error);
       return res.status(500).json({
         error: "Google OAuth failed",
       });
     }
+  }
+
+
+
+  public async logoutuser(){
+    
   }
 }

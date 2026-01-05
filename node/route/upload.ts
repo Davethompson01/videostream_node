@@ -7,7 +7,7 @@ import multer from "multer";
 
 const router = Router();
 const controller = new upload();
-const multerDIR = multer({dest: "uploads"})
+const multerDIR = multer({ dest: "uploads" });
 
 router.get("/api/generateSignUrl", apiKey, authenicate, (req, res) =>
   controller.generateSignedUrl(req, res)
@@ -29,5 +29,30 @@ router.post(
   multerDIR.single("image"),
   (req, res) => controller.uploadImage(req, res)
 );
+router.post(
+  "/api/uploadVideo",
+  apiKey,
+  authenicate,
+  authorisationMiddleWare("google_user"),
+  multerDIR.single("image"),
+  (req, res) => controller.uploadVideo(req, res)
+);
+
+router.get(
+  "/api/getusersimages",
+  apiKey,
+  authenicate,
+  authorisationMiddleWare("google_user"),
+  (req, res) => controller.getUsersImage(req, res)
+);
+
+router.get(
+  "/api/getusersVideos",
+  apiKey,
+  authenicate,
+  authorisationMiddleWare("google_user"),
+  (req, res) => controller.getUsersVideos(req, res)
+);
+
 
 export default router;
