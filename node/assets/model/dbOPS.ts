@@ -17,12 +17,12 @@ export default class dbOPS {
     return this.db_connection;
   }
 
-  private validateIdentifier(name: string) {
+  private async validateIdentifier(name: string) {
     const regex = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
     return regex.test(name);
   }
 
-  private validateColumns(columns: string[]) {
+  private async validateColumns(columns: string[]) {
     if (!Array.isArray(columns) || columns.length === 0)
       return this.utils.returnData(false, "No columns provided", []);
 
@@ -105,7 +105,9 @@ export default class dbOPS {
     table: string,
     columns: string[] = ["*"],
     condition?: string,
-    params: any[] = []
+    params: any[] = [],
+    limit?: number,
+    offset?: number
   ) {
     if (!this.validateIdentifier(table)) {
       return this.utils.returnData(false, "Invalid table name", table);
@@ -119,6 +121,12 @@ export default class dbOPS {
     // Add condition if provided
     if (condition) {
       sql += ` WHERE ${condition}`;
+    }
+
+    // Add pagination if provided
+    if (limit !== undefined && offset !== undefined) {
+      sql += ` LIMIT ? OFFSET ?`;
+      params.push(limit, offset);
     }
 
     try {

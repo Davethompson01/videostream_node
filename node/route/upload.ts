@@ -13,13 +13,13 @@ router.get("/api/generateSignUrl", apiKey, authenicate, (req, res) =>
   controller.generateSignedUrl(req, res)
 );
 
-router.post(
-  "/api/getImageMeta",
-  apiKey,
-  authenicate,
-  authorisationMiddleWare("google_user"),
-  (req, res) => controller.getImageMeta(req, res)
-);
+// router.post(
+//   "/api/getImageMeta",
+//   apiKey,
+//   authenicate,
+//   authorisationMiddleWare("google_user"),
+//   (req, res) => controller.getImageMeta(req, res)
+// );
 
 router.post(
   "/api/uploadImage",
@@ -34,7 +34,7 @@ router.post(
   apiKey,
   authenicate,
   authorisationMiddleWare("google_user"),
-  multerDIR.single("image"),
+  multerDIR.single("videos"),
   (req, res) => controller.uploadVideo(req, res)
 );
 

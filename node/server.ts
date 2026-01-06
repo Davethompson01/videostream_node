@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import OAuthRoute from "./route/OAuth.ts";
+import catalogRoute from "./route/catalog.ts";
 import apiKey from "./assets/middleware/apiKeyMiddleware.ts";
 import upload from "./route/upload.ts";
 import { corsOption } from "./assets/services/headers.ts";
@@ -22,6 +23,9 @@ app.use("/gAuth", OAuthRoute);
 
 // upload route
 app.use("/upload", upload);
+
+// catalog route
+app.use("/catalog", catalogRoute);
 
 app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);

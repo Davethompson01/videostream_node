@@ -42,28 +42,28 @@ export default class upload {
     return this.utils.sendResponse(res, 200, true, "Succesful", tokenPayload);
   }
 
-  public async getImageMeta(req: Request, res: Response) {
-    const { users_id, public_id, secure_url } = req.body;
+  // public async getImageMeta(req: Request, res: Response) {
+  //   const { users_id, public_id, secure_url } = req.body;
 
-    if (!public_id || !secure_url) {
-      return this.utils.sendResponse(res, 200, false, "Invalid Response", null);
-    }
+  //   if (!public_id || !secure_url) {
+  //     return this.utils.sendResponse(res, 200, false, "Invalid Response", null);
+  //   }
 
-    const inserModel = await this.upload.uploadVideo(
-      users_id,
-      public_id,
-      secure_url
-    );
-    if (!inserModel.success) {
-      return this.utils.sendResponse(res, 200, false, "Video failed to upload");
-    }
-    return this.utils.sendResponse(
-      res,
-      201,
-      true,
-      "Video successfully uploaded"
-    );
-  }
+  //   const inserModel = await this.upload.uploadVideo(
+  //     users_id,
+  //     public_id,
+  //     secure_url
+  //   );
+  //   if (!inserModel.success) {
+  //     return this.utils.sendResponse(res, 200, false, "Video failed to upload");
+  //   }
+  //   return this.utils.sendResponse(
+  //     res,
+  //     201,
+  //     true,
+  //     "Video successfully uploaded"
+  //   );
+  // }
 
   public async uploadImage(req: Request, res: Response) {
     try {

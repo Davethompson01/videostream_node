@@ -62,7 +62,7 @@ export default class utilis {
 
   // pashsword hash
   public async passwordHash(password: string) {
-    return await argon2.hash(password, {
+    return argon2.hash(password, {
       type: argon2.argon2id,
       // memoryUsage: 2 ** 16,
       hashLength: 50,
@@ -98,6 +98,14 @@ export default class utilis {
 
     // return success if all fields are valid
     return this.returnData(true, "All fields are valid", args);
+  }
+
+  public shuffle(arr: any) {
+    for (let i = 0; i > arr.length; i++) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], (arr[j] = arr[j]), arr[i]];
+    }
+    return arr;
   }
 
   // public async uploadBase64Image(req: Request, res: Response) {

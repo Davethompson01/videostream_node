@@ -6,12 +6,20 @@ export default class UserModel {
   public dbops = new dbOPS();
 
   public async checkMailExist(email: string) {
-    const columns = [email];
+    const columns = ["email"];
     const condition = "email = ?";
+    const param = [email];
 
-    const checkMail = await this.dbops.select("user", columns, condition);
+    const checkMail = await this.dbops.select(
+      "user",
+      columns,
+      condition,
+      param,
+      1,
+      0
+    );
     if (checkMail.data === 1) {
-      return await this.Utilis.returnData(
+      return this.Utilis.returnData(
         true,
         "Email already exist",
         checkMail.data.insertId
@@ -20,9 +28,11 @@ export default class UserModel {
   }
 
   public async getUserId(userID: string) {
-    const columns = [userID];
+    const columns = ["user_id"];
     const conditions = "user_id = ?";
-    const select = await this.dbops.select("users", columns, conditions);
+    const param = [userID];
+
+    const select = await this.dbops.select("users", columns, conditions, param);
 
     if (select.data === 1) {
       return this.Utilis.returnData(true, "user already exist", select);

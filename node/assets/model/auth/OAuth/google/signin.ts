@@ -26,7 +26,7 @@ export default class googlesignIn {
       const mailExist = await this.usermodel.checkMailExist(email);
       if (mailExist) {
         console.log("Mail exists:", mailExist);
-        return await this.Utilis.returnData(
+        return  this.Utilis.returnData(
           true,
           "Account Found",
           mailExist.data

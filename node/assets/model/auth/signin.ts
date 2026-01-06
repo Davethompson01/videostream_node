@@ -45,9 +45,9 @@ export default class googlesignIn {
 
     // always check if reponse failed - 1st
     if (!create) {
-      return await this.Utilis.returnData(false, "Failed to create account", []);
+      return  this.Utilis.returnData(false, "Failed to create account", []);
     }
-    return await this.Utilis.returnData(true, "Account succesfully created", create);
+    return  this.Utilis.returnData(true, "Account succesfully created", create);
   }
 
 

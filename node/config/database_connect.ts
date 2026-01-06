@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 class Database {
-  private static instance: Database;
+  public static instance: Database;
 
-  private constructor() {}
+  public constructor() {}
 
   public static getInstance(): Database {
     if (!Database.instance) {
